@@ -15,48 +15,74 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === "rock") {
         switch (computerSelection) {
             case "rock":
-                return "It was a tie! Both choose Rock.";
+                return "tie";
                 break;
             case "paper":
-                return "You loose! Paper beats Rock.";
+                return "loose";
                 break;
             case "scissors":
-                return "You Win! Rock Beats Paper."
+                return "win"
         }
     } else if (playerSelection === "paper") {
         switch (computerSelection) {
             case "rock":
-                return "You Win! Paper Beats Rock.";
+                return "win";
                 break;
             case "paper":
-                return "It was a tie! Both choose Paper.";
+                return "tie";
                 break;
             case "scissors":
-                return "You loose! Scissors beats Paper."
+                return "loose"
         }
     }
     else if (playerSelection === "scissors") {
         switch (computerSelection) {
             case "rock":
-                return "You loose! Rock beats Scissors.";
+                return "loose";
                 break;
             case "paper":
-                return "You Win! Scissors Beats Paper.";
+                return "win";
                 break;
             case "scissors":
-                return "It was a tie! Both choose Scissors."
+                return "tie"
         }
     }
 
 }
 
 function playGame() {
+    let playerScore = 0
+    let computerScore = 0
+
     for (let i = 0; i <=4; i++) {
         let playerSelection = prompt("Rock, Paper or Scissors?")
         let computerSelection = getComputerChoice()
+        
 
         let result = playRound(playerSelection, computerSelection)
-        console.log(result)
+        if (result === "win") {
+            playerScore = playerScore + 2
+            console.log(`You Win! ${playerSelection} beats ${computerSelection}`)
+        } else if (result === "tie") {
+            playerScore = playerScore + 1
+            computerScore = computerScore + 1
+            console.log(`It was a Tie! Both choose ${playerSelection}`)
+        } else if (result === "loose") {
+            computerScore = computerScore + 2
+            console.log(`You Loose! ${computerSelection} beats ${playerSelection}`)
+        }
+        
+        
+
+    }
+    //Displays final score
+    console.log(`Your score was ${playerScore} and computer's score was ${computerScore}`)
+    if (playerScore > computerScore) {
+        console.log("You Win this round!")
+    } else if (playerScore < computerScore) {
+        console.log("You Loose this round!")
+    } else {
+        console.log("This round was a Tie!")
     }
 }
 
