@@ -9,7 +9,7 @@ function getComputerChoice() {
     }
 }
 
-function playGame(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase()
 
     if (playerSelection === "rock") {
@@ -50,6 +50,14 @@ function playGame(playerSelection, computerSelection) {
 
 }
 
-const playerSelection = "PaPer";
-const computerSelection = getComputerChoice();
-console.log(playGame(playerSelection, computerSelection));
+function playGame() {
+    for (let i = 0; i <=4; i++) {
+        let playerSelection = prompt("Rock, Paper or Scissors?")
+        let computerSelection = getComputerChoice()
+
+        let result = playRound(playerSelection, computerSelection)
+        console.log(result)
+    }
+}
+
+playGame()
