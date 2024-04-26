@@ -65,33 +65,53 @@ scissorsBtn.addEventListener("click", () => {
     playGame("scissors")
 })
 
+resultDiv = document.querySelector("#results");
+resultPara = document.createElement("p");
+scorePara = document.createElement("p");
+winnerPara = document.createElement("p");
+
+let playerScore = 0
+let computerScore = 0
+
 function playGame(playerSelection) {
-    let playerScore = 0
-    let computerScore = 0
 
     let computerSelection = getComputerChoice()
-        
-
+            
     let result = playRound(playerSelection, computerSelection)
     if (result === "win") {
         playerScore = playerScore + 2
-        console.log(`You Win! ${playerSelection} beats ${computerSelection}`)
+        resultPara.textContent = `You Win! ${playerSelection} beats ${computerSelection}`;
     } else if (result === "tie") {
         playerScore = playerScore + 1
         computerScore = computerScore + 1
-        console.log(`It was a Tie! Both choose ${playerSelection}`)
+        resultPara.textContent = `It was a Tie! Both choose ${playerSelection}`;
     } else if (result === "loose") {
         computerScore = computerScore + 2
-        console.log(`You Loose! ${computerSelection} beats ${playerSelection}`)
+        resultPara.textContent = `You Loose! ${computerSelection} beats ${playerSelection}`;
     }
-        
-    //Displays final score
-    console.log(`Your score was ${playerScore} and computer's score was ${computerScore}`)
+
+    resultDiv.appendChild(resultPara);
+    displayScore(playerScore, computerScore)
+
+    if (playerScore >= 5 || computerScore >= 5) {
+        displayFinalResult(playerScore, computerScore)
+    }
+}
+
+function displayScore(playerScore, computerScore) {
+    scorePara.textContent = `Your current score is ${playerScore} and computer's score is ${computerScore}`;
+    resultDiv.appendChild(scorePara);
+}
+
+function displayFinalResult(playerScore, computerScore) {
     if (playerScore > computerScore) {
-        console.log("You Win this round!")
+        winnerPara.textContent = "You have Won this game!, Refresh to play again.";
+        resultDiv.appendChild(winnerPara);
     } else if (playerScore < computerScore) {
-        console.log("You Loose this round!")
+        winnerPara.textContent = "You Lost this game!, Refresh to play again.";
+        resultDiv.appendChild(winnerPara);
     } else {
-        console.log("This round was a Tie!")
+        winnerPara.textContent = "This game was a Tie!, Refresh to play again.";
+        resultDiv.appendChild(winnerPara);
     }
 }
